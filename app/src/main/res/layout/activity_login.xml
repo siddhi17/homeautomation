@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?><layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="data"
+            type="com.homeautomation.viewModels.LoginViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        tools:context=".activity.LoginActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/splash_background"
+            tools:context=".Activities.LoginActivity">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_logo"
+                android:layout_width="@dimen/margin_100"
+                android:layout_height="@dimen/margin_100"
+                android:src="@drawable/logo"
+                android:scaleType="fitXY"
+                android:layout_marginTop="@dimen/margin_20"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/login_to_your_account"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_logo"/>
+
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:layout_marginStart="@dimen/margin_40"
+                    android:layout_marginLeft="@dimen/margin_40"
+                    android:layout_marginRight="@dimen/margin_40"
+                    android:layout_marginEnd="@dimen/margin_40"
+                    android:layout_height="@dimen/margin_52"
+                    android:layout_gravity="center"
+                    android:background="@drawable/et_background"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="@string/email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16"
+                    android:text="@={data.emailId}"
+                    app:layout_constraintTop_toBottomOf="@id/text_title"/>
+
+
+
+             <RelativeLayout
+                android:id="@+id/linear_pass"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_52"
+                 android:background="@drawable/et_background"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginStart="@dimen/margin_40"
+                android:layout_marginLeft="@dimen/margin_40"
+                android:layout_marginRight="@dimen/margin_40"
+                android:layout_marginEnd="@dimen/margin_40"
+                app:layout_constraintTop_toBottomOf="@id/et_email"
+                android:orientation="horizontal">
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_52"
+                android:padding="@dimen/margin_15"
+                android:background="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="@string/enter_your_password"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:maxLength="21"
+                android:maxLines="1"
+                android:text="@={data.pass}"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16"
+                tools:ignore="ExtraText"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/imageView_show"
+                android:layout_toLeftOf="@id/imageView_show"
+                android:layout_alignParentLeft="true" />
+
+
+            <ImageView
+                android:id="@+id/imageView_show"
+                android:layout_width="@dimen/margin_24"
+                android:layout_height="@dimen/margin_24"
+                android:layout_marginEnd="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:src="@drawable/ic_hide"
+                android:onClick="@{(v)->click.onClick(v)}"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+
+             </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textView_forgot_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/forgot_password"
+                android:textSize="@dimen/text_size_16"
+                android:clickable="true"
+                android:onClick="@{(v)->click.onClick(v)}"
+                android:textColor="@color/white"
+                android:fontFamily="@font/roboto_bold"
+                app:layout_constraintTop_toBottomOf="@id/btn_proceed"
+                app:layout_constraintStart_toStartOf="parent"
+                android:focusable="true"
+                android:layout_marginStart="@dimen/margin_40"
+                android:layout_marginLeft="@dimen/margin_40"
+                android:layout_marginRight="@dimen/margin_40"
+                android:layout_marginEnd="@dimen/margin_40"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_proceed"
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/linear_pass"
+                android:layout_height="@dimen/margin_56"
+                android:layout_marginStart="@dimen/margin_40"
+                android:layout_marginTop="@dimen/margin_40"
+                android:layout_marginEnd="@dimen/margin_40"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/login"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_size_16"
+                android:onClick="@{(v)->click.onClick(v)}"/>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textView_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/register"
+                    android:textSize="@dimen/text_size_16"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:onClick="@{(v)->click.onClick(v)}"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_marginRight="@dimen/margin_40"
+                    android:layout_marginEnd="@dimen/margin_40"
+                    app:layout_constraintTop_toBottomOf="@id/btn_proceed"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

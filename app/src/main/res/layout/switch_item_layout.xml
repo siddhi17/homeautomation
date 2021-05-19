@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_switch"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--
+    <ImageView
+        android:id="@+id/img_branch"
+        android:clickable="false"
+        android:focusable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/checkbox_unselect"
+        android:text="@string/change_status"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/color_B9B9B9"
+        android:textSize="@dimen/text_size_15"/>
+-->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_switch_name"
+        android:layout_width="@dimen/margin_120"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginLeft="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginRight="@dimen/margin_16"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Switch 1"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/text_size_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginLeft="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginRight="@dimen/margin_16"
+        android:background="@null"
+        android:fontFamily="@font/roboto_regular"
+        android:hint="Enter your friendly name"
+        android:imeOptions="actionNext"
+        android:inputType="textMultiLine"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/text_size_16"
+        app:layout_constraintEnd_toStartOf="@id/switch_order"
+        app:layout_constraintStart_toEndOf="@+id/text_switch_name"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ExtraText"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:checked="true"/>
+
+    <View
+        android:id="@+id/view_wifi"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginLeft="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginRight="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_11"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/et_name"
+        app:layout_constraintEnd_toStartOf="@id/switch_order"
+        app:layout_constraintStart_toEndOf="@id/text_switch_name"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

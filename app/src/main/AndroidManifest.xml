@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.homeautomation">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.HomeAutomation"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.RoomDetailActivity"></activity>
+        <activity android:name=".Activities.RoomsActivity"></activity>
+        <activity android:name=".Activities.LocationActivity" />
+        <activity android:name=".Activities.RegisterActivity" />
+        <activity android:name=".Activities.ResetPasswordActivity" />
+        <activity android:name=".Activities.VerificationActivity" />
+        <activity android:name=".Activities.SendVerificationCodeActivity" />
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.SlpashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activities.ConnectWifiActivity" />
+        <activity android:name=".Activities.AddDeviceActivity" />
+        <activity android:name=".Activities.MainActivity" />
+    </application>
+
+</manifest>

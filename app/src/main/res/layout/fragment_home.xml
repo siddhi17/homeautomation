@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_root"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@color/blue_200"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+        android:id="@+id/txt_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Hello User"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="@dimen/text_size_28"
+        android:layout_marginTop="@dimen/margin_40"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginLeft="@dimen/margin_16" />
+
+
+    <TextView
+        android:id="@+id/txt_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txt_welcome"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="5 May 2021"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="@dimen/text_size_16"
+        android:layout_marginTop="@dimen/margin_5"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginLeft="@dimen/margin_16" />
+
+
+    <LinearLayout
+        android:id="@+id/linear_add"
+        android:layout_width="@dimen/margin_80"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginRight="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_40"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="@dimen/margin_5"
+        android:paddingStart="@dimen/margin_10"
+        android:paddingLeft="@dimen/margin_10"
+        android:layout_marginStart="@dimen/margin_20"
+        android:paddingEnd="@dimen/margin_10"
+        android:background="@drawable/add_drawable"
+        android:paddingRight="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_20">
+
+
+        <ImageView
+            android:layout_width="@dimen/margin_15"
+            android:layout_height="@dimen/margin_15"
+            android:src="@drawable/ic_add"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/text_size_14"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Add"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/margin_5"
+            android:layout_marginLeft="@dimen/margin_5" />
+
+    </LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/margin_10"
+            app:cardBackgroundColor="@color/white"
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/txt_date"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
+            android:layout_marginEnd="@dimen/margin_16"
+            app:cardCornerRadius="@dimen/margin_30"
+            android:layout_marginTop="@dimen/margin_30">
+
+            <RelativeLayout
+                android:id="@+id/relative_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageView_search"
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    app:srcCompat="@drawable/ic_edit"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_15"
+                    tools:ignore="VectorDrawableCompat"
+                    android:layout_marginEnd="@dimen/margin_30"
+                    android:layout_marginRight="@dimen/margin_30"
+                    android:layout_centerVertical="true"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="@string/home"
+                    android:background="@null"
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/text_size_18"
+                    android:layout_marginLeft="@dimen/margin_30"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/margin_30"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:layout_marginBottom="@dimen/margin_15"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:layout_toLeftOf="@id/imageView_search"
+                    android:layout_toStartOf="@id/imageView_search" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_20"
+        android:background="@color/blue_500"
+        app:layout_constraintTop_toBottomOf="@id/layout_root"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_root">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="-20dp"
+        android:background="@drawable/top_corners_drawable"
+        android:orientation="vertical"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="16dp">
+
+
+        <TextView
+            android:id="@+id/txt_devices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_30"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/devices"
+            android:textColor="@color/blue_200"
+            android:textSize="@dimen/text_size_24"
+            app:layout_constraintBottom_toTopOf="@+id/rv_devices"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_devices"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_200"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_10"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/txt_rooms"
+            app:layout_constraintTop_toBottomOf="@+id/txt_devices"
+            tools:listitem="@layout/item_device_layout" />
+
+
+        <TextView
+            android:id="@+id/txt_rooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/rooms"
+            android:layout_marginTop="@dimen/margin_10"
+            android:textColor="@color/blue_200"
+            android:textSize="@dimen/text_size_24"
+            app:layout_constraintBottom_toTopOf="@+id/rv_rooms"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_devices" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_rooms"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_220"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_10"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_rooms"
+            tools:layout_editor_absoluteX="20dp"
+            android:layout_marginBottom="@dimen/margin_60"
+            tools:listitem="@layout/item_rooms_layout" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

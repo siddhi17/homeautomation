@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">HomeAutomation</string>
+    <string name="add_device">Add New Device</string>
+    <string name="choose_your_device">Choose Your New Device</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_wifi">Select Wi-Fi Network</string>
+    <string name="room">Room</string>
+    <string name="bedroom">Bedroom</string>
+    <string name="home">Home</string>
+    <string name="proceed">Proceed</string>
+    <string name="password">Password</string>
+    <string name="connect">Connect</string>
+    <string name="connecting_a_device">Connecting a device...</string>
+    <string name="this_may_take_a_moment">This may take a moment...</string>
+    <string name="searching_for_new_kushall_device">Searching for New Kushall Device</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="kushall">KUSHALL</string>
+    <string name="login_to_your_account">Login to your account</string>
+    <string name="email">Email-Id</string>
+    <string name="enter_your_password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Sign In</string>
+    <string name="register">Sign Up</string>
+    <string name="title">Enter valid Email-Id to receive unique verification code</string>
+    <string name="get_verification_code">Get Verification Code</string>
+    <string name="otp">Enter OTP</string>
+    <string name="resend">A verification code is sent to your Email-Id : </string>
+    <string name="resendOtp">Resend Otp in : </string>
+    <string name="resend_verification_code">Resend Verification Code</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password_error">Password must contain a uppercase and lowercase letter, numbers and symbols such as !#$% </string>
+    <string name="create_account">Create Account</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="terms"><![CDATA[I agree with <u> Privacy Policy </u> & <u> Terms Of Use</u> ]]></string>
+    <string name="title_activity_home">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_favourites">Favourites</string>
+    <string name="title_scheduler">Scheduler</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_location">Select Location</string>
+    <string name="title_activity_dashboard">MainActivity</string>
+    <string name="title_activity_room">Select Room</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="set_up_device">Setting-Up New Device</string>
+
+    <string name="confirm_password_error">Please enter Confirm Password.</string>
+    <string name="new_passowrd_error">Please enter your New Password.</string>
+
+    <string name="password_confirm_does_not_match_error">Password does not match.</string>
+
+    <string name="email_id_err">Please enter Email Id</string>
+    <string name="pass_err">Please enter Password</string>
+    <string name="mobile_number_error">Please enter your mobile number.</string>
+    <string name="mobile_number_error_valid">Please enter at least 6 digit mobile number.</string>
+    <string name="email_id_valid_error">Please enter valid email id.</string>
+    <string name="otp_error">Please enter the otp.</string>
+    <string name="otp_valid_error">Please enter valid otp.</string>
+    <string name="first_name_error">Please enter your first name.</string>
+    <string name="last_name_error">Please enter your last name.</string>
+    <string name="mobile_number_valid_error">Please enter at least 6 digit mobile number.</string>
+
+    <string name="something_went_wrong">Something went wrong pLease try later</string>
+    <string name="error_internet">Please check your Internet Connection</string>
+    <string name="error_exception">Some exception occurred</string>
+    <string name="terms_error"><![CDATA[Please select Terms & Conditions]]></string>
+    <string name="add_location">Add New Location</string>
+    <string name="enter_location">Enter Location</string>
+    <string name="add_location_error">Please enter location name</string>
+    <string name="location">Location |  </string>
+    <string name="devices">Devices</string>
+    <string name="rooms">Rooms</string>
+    <string name="add_room_error">"Please Select Room "</string>
+
+</resources>
