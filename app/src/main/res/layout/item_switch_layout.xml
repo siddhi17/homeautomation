@@ -26,15 +26,6 @@
             android:paddingTop="@dimen/margin_15">
 
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_device"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_ks_100"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_device_name"
                 android:layout_width="wrap_content"
@@ -45,7 +36,7 @@
                 android:textSize="@dimen/text_size_18"
                 android:fontFamily="@font/roboto_medium"
                 android:layout_marginStart="@dimen/margin_10"
-                app:layout_constraintStart_toEndOf="@id/img_device"
+                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginLeft="@dimen/margin_10" />
 
 
@@ -53,16 +44,17 @@
                 android:id="@+id/img_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_edit"
+                android:src="@drawable/component_148"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_status_device"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="Online"
-                android:textColor="@color/color_green"
+                android:textColor="@color/blue_200"
                 android:textSize="@dimen/text_size_12"
                 android:fontFamily="@font/roboto_regular"
                 android:layout_marginStart="@dimen/margin_10"

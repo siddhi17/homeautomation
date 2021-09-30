@@ -7,6 +7,8 @@ data class Device(
     val id: String,
     @SerializedName("deviceId")
     val deviceId: String,
+    @SerializedName("deviceName")
+    val deviceName: String,
     @SerializedName("userId")
     val userId: String,
     @SerializedName("roomId")
@@ -14,12 +16,32 @@ data class Device(
     @SerializedName("locationId")
     val locationId: String,
     @SerializedName("switches")
-    val switches: List<Switches>
+    val switches: List<Switche>
 ) {
-    data class Switches(
-        @SerializedName("switch1")
-        val switch1: String,
-        @SerializedName("switch2")
-        val switch2: String
+    data class Switche(
+            val name: String,
+            val type: String,
+            val id: String
+    )
+}
+
+data class AddDevice(
+        @SerializedName("deviceId")
+        val deviceId: String,
+        @SerializedName("deviceName")
+        val deviceName: String,
+        @SerializedName("userId")
+        val userId: String,
+        @SerializedName("roomId")
+        val roomId: String,
+        @SerializedName("locationId")
+        val locationId: String,
+        @SerializedName("switches")
+        val switches: List<AddDevice.Switche>
+) {
+    data class Switche(
+            val name: String,
+            val type: String,
+            val id: String
     )
 }

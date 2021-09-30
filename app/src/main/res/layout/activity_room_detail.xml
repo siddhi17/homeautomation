@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Activities.RoomDetailActivity">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,15 +20,15 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imageView_back"
-                    android:layout_width="@dimen/margin_24"
-                    android:layout_height="@dimen/margin_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_left_arrow"
+                    app:srcCompat="@drawable/arrow_89_64_1"
                     tools:ignore="VectorDrawableCompat"
                     android:layout_marginBottom="@dimen/margin_20"
-                    android:layout_marginTop="@dimen/margin_20"/>
+                    android:layout_marginTop="@dimen/margin_30"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_title"
@@ -38,36 +39,52 @@
                     android:textColor="@color/colorText"
                     android:textSize="@dimen/text_size_24"
                     android:layout_gravity="center_vertical"
-                    app:layout_constraintEnd_toStartOf="@id/imageView_room"
-                    app:layout_constraintStart_toEndOf="@id/imageView_back"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imageView_settings"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="@dimen/margin_20"
-                    android:layout_marginBottom="@dimen/margin_20"/>
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:layout_marginBottom="@dimen/margin_20"
+                    android:layout_marginEnd="@dimen/margin_30"
+                    android:layout_marginRight="@dimen/margin_30" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imageView_room"
-                    android:layout_width="@dimen/margin_120"
-                    android:layout_height="@dimen/margin_120"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="80dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="@dimen/margin_40"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView_back"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_living_room"
                     tools:ignore="VectorDrawableCompat"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:layout_marginLeft="@dimen/margin_40" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_devices"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="@dimen/margin_5"
                     android:fontFamily="@font/roboto_regular"
                     android:text="2 Device(s)"
                     android:textColor="@color/blue_200"
                     android:textSize="@dimen/text_size_14"
-                    android:layout_gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="@+id/text_title"
                     app:layout_constraintStart_toStartOf="@id/text_title"
-                    app:layout_constraintTop_toBottomOf="@id/text_title"
-                    android:layout_marginTop="@dimen/margin_5"
-                    android:layout_marginBottom="@dimen/margin_20"/>
+                    app:layout_constraintTop_toBottomOf="@id/text_title" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageView_settings"
+                    android:layout_width="@dimen/margin_28"
+                    android:layout_height="@dimen/margin_28"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_room_settings"
+                    tools:ignore="VectorDrawableCompat"
+                    android:layout_marginBottom="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_30"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -83,6 +100,7 @@
         android:layout_marginRight="@dimen/margin_16"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="@dimen/margin_20"
+        tools:listitem="@layout/item_multiple_switch_layout"
         app:layout_constraintTop_toBottomOf="@id/layout_top"/>
 
 

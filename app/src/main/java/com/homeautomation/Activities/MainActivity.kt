@@ -1,102 +1,146 @@
 package com.homeautomation.Activities
 
+import android.app.ProgressDialog
 import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.homeautomation.Activities.Fragments.HomeFragment
+import com.google.gson.Gson
+import com.homeautomation.Activities.Models.MqttResponse
+import com.homeautomation.Activities.Models.StaticRoom
+import com.homeautomation.Activities.Responses.GetLocationsResponse
+import com.homeautomation.Activities.Responses.GetRoomsResponse
+import com.homeautomation.Activities.Responses.topicResponse
 import com.homeautomation.R
 import com.homeautomation.Utils.ErrorUtil
+import com.homeautomation.Utils.MqttClientHelper
 import com.homeautomation.Utils.NetworkUtils
 import com.homeautomation.Utils.ProgressDialogUtils
 import com.homeautomation.base.BaseActivity
 import com.homeautomation.showToast
-import com.homeautomation.viewModels.DeviceViewModel
+import com.homeautomation.viewModels.HomeViewModel
+import com.homeautomation.viewModels.LocationViewModel
 import com.homeautomation.viewModels.LoginViewModel
+import com.homeautomation.viewModels.RoomsViewModel
+import org.eclipse.paho.client.mqttv3.MqttException
+import java.util.*
+import kotlin.collections.ArrayList
 
-class MainActivity : BaseActivity(), View.OnClickListener {
 
-    var userName: String = ""
+class MainActivity : BaseActivity() {
 
+    lateinit var homeViewModel: HomeViewModel
+    lateinit var loginViewModel: LoginViewModel
+    lateinit var locationViewModel: LocationViewModel
+    lateinit var roomsViewModel: RoomsViewModel
+    var mqttClient: MqttClientHelper? = null
+    var timer = Timer()
+    var timerDevice = Timer()
+    var gson = Gson()
     override fun init() {
-
-
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navController = Navigation.findNavController(this,R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home, R.id.navigation_scheduler, R.id.navigation_favourites, R.id.navigation_settings))
-      //  setupActionBarWithNavController(navController, appBarConfiguration)
+        val appBarConfiguration = AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_scheduler, R.id.navigation_favourites, R.id.navigation_settings)
+                .build()
+       // navView.itemIconTintList = null
+
         navView.setupWithNavController(navController)
 
-      //  loadFragment(HomeFragment())
+        homeViewModel.mProgess.value = true
+
+        getDevices()
+
+        mqttClient = MqttClientHelper(this)
 
     }
 
-    lateinit var loginViewModel: LoginViewModel
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+    override fun onResume() {
+        super.onResume()
 
         init()
-        getUser()
-        myObserver()
-
     }
 
-    private fun getUser(){
+    fun listenToMqtt(devicesList: ArrayList<GetRoomsResponse.Device>) {
+        try {
+            lateinit var topic: String
+            homeViewModel.mProgess.value = true
 
+            timer.scheduleAtFixedRate(object : TimerTask() {
+                override fun run() {
+                    for (device in devicesList) {
+                        topic = device.deviceId.trim() + "\\1"
+
+                        mqttClient?.let { homeViewModel.hitMqttServer(it, topic)
+
+                        }
+                    }
+                }
+            }, 10000, 10000)
+
+        } catch (e: MqttException) {
+            // More code to handle exception
+        } catch (e: IllegalArgumentException) {
+        }
+    }
+
+    fun getDevices() {
 
         if (NetworkUtils.isInternetAvailable(this)) {
-            loginViewModel.emailId = preference.userEmailId
-                loginViewModel.hitGetUserApi()
+            homeViewModel.userId = preference.userId
+            homeViewModel.hitGetDevicesApi(true)
         } else {
             showToast(getString(R.string.error_internet))
         }
     }
 
-    private fun myObserver() {
+    private fun getUser() {
 
-        loginViewModel.getUserResponse.observe(this, Observer {
-
-            preference.userName = it.user.firstName + " " + it.user.lastName
-            preference.userId = it.user.id
-            preference.userEmailId = it.user.email
-
-            userName = it.user.firstName + " " + it.user.lastName
-
-        })
-
-        loginViewModel.errorGetUser.observe(this, Observer {
-
-            ErrorUtil.handlerGeneralError(this, it)
-        })
-
-        loginViewModel.mProgess.observe(this, Observer {
-            if (it) {
-                ProgressDialogUtils.getInstance().hideProgress()
-
-                ProgressDialogUtils.getInstance().showProgress(this, true)
-            } else {
-                ProgressDialogUtils.getInstance().hideProgress()
-            }
-        })
+        if (NetworkUtils.isInternetAvailable(this)) {
+            loginViewModel.emailId = preference.userEmailId
+            loginViewModel.hitGetUserApi()
+        } else {
+            showToast(getString(R.string.error_internet))
+        }
     }
 
-    override fun onClick(v: View?) {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        homeViewModel =
+                ViewModelProvider(this).get(HomeViewModel::class.java)
+        loginViewModel =
+                ViewModelProvider(this).get(LoginViewModel::class.java)
+        locationViewModel =
+                ViewModelProvider(this).get(LocationViewModel::class.java)
+        roomsViewModel = ViewModelProvider(this).get(RoomsViewModel::class.java)
+
+        homeViewModel.userId = preference.userId
+        locationViewModel.userId = preference.userId
+
+        getUser()
+        //init()
+
+        myObserver()
+    }
+
+    private fun myObserver() {
 
 
+    }
+
+    override fun onDestroy() {
+        timer.cancel();
+        super.onDestroy()
     }
 }

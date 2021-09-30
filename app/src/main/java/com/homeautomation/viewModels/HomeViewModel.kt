@@ -5,11 +5,17 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.material.snackbar.Snackbar
+import com.homeautomation.Activities.Models.sendObject
 import com.homeautomation.Activities.Responses.*
+import com.homeautomation.Utils.MqttClientHelper
 import com.homeautomation.base.BaseViewModel
+import com.homeautomation.showToast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.eclipse.paho.client.mqttv3.MqttClient
+import org.eclipse.paho.client.mqttv3.MqttException
 
 class HomeViewModel : BaseViewModel() {
 
@@ -25,17 +31,49 @@ class HomeViewModel : BaseViewModel() {
     var access_token: String = ""
 
     var userId: String = ""
+    lateinit var snackbarMsg : String
+    var topic = ""
+
+
+    var devicesList: ArrayList<GetRoomsResponse.Device> = ArrayList()
 
     /*Response*/
     var getDevicesResponse = MutableLiveData<GetRoomsResponse>()
     var getRoomsResponse = MutableLiveData<GetRoomsResponse>()
+    var mqttListenResponse = MutableLiveData<MqttListenResponse>()
 
     /*Error*/
     var errorGetDevices = MutableLiveData<Throwable>()
     var errorGetRooms = MutableLiveData<Throwable>()
 
 
-    fun hitGetDevicesApi() {
+
+    fun hitMqttServer(mqttClient: MqttClientHelper,topic: String)
+    {
+        if (topic.isNotEmpty()) {
+            try {
+                mqttClient.subscribe(topic)
+              //  "Subscribed to topic'$topic'"
+            } catch (ex: MqttException) {
+                "Error subscribing to topic: $topic"
+            }
+        }
+    }
+
+    fun hitMqttServerPublish(mqttClient: MqttClientHelper,topic: String,sendObject: String)
+    {
+        if (topic.isNotEmpty()) {
+            try {
+                mqttClient.publish(topic, sendObject)
+                "Published to topic '$topic'"
+            } catch (ex: MqttException) {
+                "Error Publishing to topic: $topic"
+            }
+        }
+    }
+
+
+    fun hitGetDevicesApi(isProgress:Boolean) {
 
         disposable = apiInterface.getDevicesApi(
             userId = userId
@@ -44,10 +82,10 @@ class HomeViewModel : BaseViewModel() {
             .doOnSubscribe {
                 mProgess.value = true
             }.doOnTerminate {
+                    if(!isProgress)
                 mProgess.value = false
             }
-            .subscribe({
-                onSuccessGetDevices(it)
+            .subscribe({ onSuccessGetDevices(it)
             },
                 {
                     onErrorGetDevices(it)
@@ -64,7 +102,7 @@ class HomeViewModel : BaseViewModel() {
     }
 
 
-    fun hitGetRoomsApi() {
+    fun hitGetRoomsApi(isProgress: Boolean) {
 
         disposable = apiInterface.getRoomsApi(
             userId = userId
@@ -73,6 +111,7 @@ class HomeViewModel : BaseViewModel() {
             .doOnSubscribe {
                 mProgess.value = true
             }.doOnTerminate {
+                    if(!isProgress)
                 mProgess.value = false
             }
             .subscribe({

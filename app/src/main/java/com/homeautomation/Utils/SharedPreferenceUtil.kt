@@ -60,11 +60,6 @@ constructor(val context: Context) {
         get() = sharedPreferences["MobileNumber", ""]!!
         set(value) = sharedPreferences.set("MobileNumber", value)
 
-    var mobileNumberCountryCode: String
-        get() = sharedPreferences["MobileNumberCountryCode", ""]!!
-        set(value) = sharedPreferences.set("MobileNumberCountryCode", value)
-
-
     var userPermission: String
         get() = sharedPreferences["userPermission", ""]!!
         set(value) = sharedPreferences.set("userPermission", value)
@@ -73,194 +68,45 @@ constructor(val context: Context) {
         get() = sharedPreferences["oldPassword", ""]!!
         set(value) = sharedPreferences.set("oldPassword", value)
 
-    var defaultLocation: String
-        get() = sharedPreferences["defaultLocation", ""]!!
-        set(value) = sharedPreferences.set("defaultLocation", value)
+    var firstName: String
+        get() = sharedPreferences["firstName", ""]!!
+        set(value) = sharedPreferences.set("firstName", value)
 
-    var isStoreAdded: Boolean
-        get() = sharedPreferences["isStoreAdded"]!!
-        set(value) = sharedPreferences.set("isStoreAdded", value)
+    var lastName: String
+        get() = sharedPreferences["lastName"]!!
+        set(value) = sharedPreferences.set("lastName", value)
 
-    var city: String
-        get() = sharedPreferences["city", ""]!!
-        set(value) = sharedPreferences.set("city", value)
+    var locationCounter: Int
+        get() = sharedPreferences["locationCounter"]!!
+        set(value) = sharedPreferences.set("locationCounter", value)
 
-    var isStoreUser: String
-        get() = sharedPreferences["isStoreUser", ""]!!
-        set(value) = sharedPreferences.set("isStoreUser", value)
+    var roomCounter: Int
+        get() = sharedPreferences["roomCounter"]!!
+        set(value) = sharedPreferences.set("roomCounter", value)
 
-    var isVisibleDash: Boolean
-        get() = sharedPreferences["isVisibleDash"]!!
-        set(value) = sharedPreferences.set("isVisibleDash", value)
+    var deviceId: String
+        get() = sharedPreferences["deviceId"]!!
+        set(value) = sharedPreferences.set("deviceId", value)
 
-    var canSeeUpcomingRequestDash: Boolean
-        get() = sharedPreferences["canSeeUpcomingRequestDash"]!!
-        set(value) = sharedPreferences.set("canSeeUpcomingRequestDash", value)
+    var locationId: String
+        get() = sharedPreferences["locationId"]!!
+        set(value) = sharedPreferences.set("locationId", value)
 
-    var canApproveRejectRequestDash: Boolean
-        get() = sharedPreferences["canApproveRejectRequestDash"]!!
-        set(value) = sharedPreferences.set("canApproveRejectRequestDash", value)
+    var roomId: String
+        get() = sharedPreferences["roomId"]!!
+        set(value) = sharedPreferences.set("roomId", value)
 
-    var canViewOrderRequestDash: Boolean
-        get() = sharedPreferences["canViewOrderRequestDash"]!!
-        set(value) = sharedPreferences.set("canViewOrderRequestDash", value)
+    var areLocationsAdded: Boolean
+        get() = sharedPreferences["areLocationsAdded"]!!
+        set(value) = sharedPreferences.set("areLocationsAdded", value)
 
-    var isVisibleProduct: Boolean
-        get() = sharedPreferences["isVisibleProduct"]!!
-        set(value) = sharedPreferences.set("isVisibleProduct", value)
+    var areRoomsAdded: Boolean
+        get() = sharedPreferences["areRoomsAdded"]!!
+        set(value) = sharedPreferences.set("areRoomsAdded", value)
 
-    var viewItemProduct: Boolean
-        get() = sharedPreferences["viewItemProduct"]!!
-        set(value) = sharedPreferences.set("viewItemProduct", value)
-
-    var addItemProduct: Boolean
-        get() = sharedPreferences["addItemProduct"]!!
-        set(value) = sharedPreferences.set("addItemProduct", value)
-
-    var editItemProduct: Boolean
-        get() = sharedPreferences["editItemProduct"]!!
-        set(value) = sharedPreferences.set("editItemProduct", value)
-
-    var deleteItemProduct: Boolean
-        get() = sharedPreferences["deleteItemProduct"]!!
-        set(value) = sharedPreferences.set("deleteItemProduct", value)
-
-    var isVisibleReport: Boolean
-        get() = sharedPreferences["isVisibleReport"]!!
-        set(value) = sharedPreferences.set("isVisibleReport", value)
-
-    var canExportItem: Boolean
-        get() = sharedPreferences["canExportItem"]!!
-        set(value) = sharedPreferences.set("canExportItem", value)
-
-    var showQrCode: Boolean
-        get() = sharedPreferences["showQrCode"]!!
-        set(value) = sharedPreferences.set("showQrCode", value)
-
-    var isVisibleOrder: Boolean
-        get() = sharedPreferences["isVisibleOrder"]!!
-        set(value) = sharedPreferences.set("isVisibleOrder", value)
-
-    var generateInvoiceOrder: Boolean
-        get() = sharedPreferences["generateInvoiceOrder"]!!
-        set(value) = sharedPreferences.set("generateInvoiceOrder", value)
-
-    var isVisibleDelivery: Boolean
-        get() = sharedPreferences["isVisibleDelivery"]!!
-        set(value) = sharedPreferences.set("isVisibleDelivery", value)
-
-    var isVisibleInventory: Boolean
-        get() = sharedPreferences["isVisibleInventory"]!!
-        set(value) = sharedPreferences.set("isVisibleInventory", value)
-
-    var isUpdateInventory: Boolean
-        get() = sharedPreferences["isUpdateInventory"]!!
-        set(value) = sharedPreferences.set("isUpdateInventory", value)
-
-    var isVisibleFinance: Boolean
-        get() = sharedPreferences["isVisibleFinance"]!!
-        set(value) = sharedPreferences.set("isVisibleFinance", value)
-
-    var canExportItemFinance: Boolean
-        get() = sharedPreferences["canExportItemFinance"]!!
-        set(value) = sharedPreferences.set("canExportItemFinance", value)
-
-    var isVisibleOffer: Boolean
-        get() = sharedPreferences["isVisibleOffer"]!!
-        set(value) = sharedPreferences.set("isVisibleOffer", value)
-
-    var viewItemOffer: Boolean
-        get() = sharedPreferences["viewItemOffer"]!!
-        set(value) = sharedPreferences.set("viewItemOffer", value)
-
-    var addItemOffer: Boolean
-        get() = sharedPreferences["addItemOffer"]!!
-        set(value) = sharedPreferences.set("addItemOffer", value)
-
-    var editItemOffer: Boolean
-        get() = sharedPreferences["editItemOffer"]!!
-        set(value) = sharedPreferences.set("editItemOffer", value)
-
-    var deleteItemOffer: Boolean
-        get() = sharedPreferences["deleteItemOffer"]!!
-        set(value) = sharedPreferences.set("deleteItemOffer", value)
-
-    var changeStatusOffer: Boolean
-        get() = sharedPreferences["changeStatusOffer"]!!
-        set(value) = sharedPreferences.set("changeStatusOffer", value)
-
-    var isVisibleBranch: Boolean
-        get() = sharedPreferences["isVisibleBranch"]!!
-        set(value) = sharedPreferences.set("isVisibleBranch", value)
-
-    var addItemBranch: Boolean
-        get() = sharedPreferences["addItemBranch"]!!
-        set(value) = sharedPreferences.set("addItemBranch", value)
-
-    var editItemBranch: Boolean
-        get() = sharedPreferences["editItemBranch"]!!
-        set(value) = sharedPreferences.set("editItemBranch", value)
-
-    var deleteItemBranch: Boolean
-        get() = sharedPreferences["deleteItemBranch"]!!
-        set(value) = sharedPreferences.set("deleteItemBranch", value)
-
-    var isVisibleCategory: Boolean
-        get() = sharedPreferences["isVisibleCategory"]!!
-        set(value) = sharedPreferences.set("isVisibleCategory", value)
-
-    var addItemCategory: Boolean
-        get() = sharedPreferences["addItemCategory"]!!
-        set(value) = sharedPreferences.set("addItemCategory", value)
-
-    var editItemCategory: Boolean
-        get() = sharedPreferences["editItemCategory"]!!
-        set(value) = sharedPreferences.set("editItemCategory", value)
-
-    var deleteItemCategory: Boolean
-        get() = sharedPreferences["deleteItemCategory"]!!
-        set(value) = sharedPreferences.set("deleteItemCategory", value)
-
-    var isVisibleRole: Boolean
-        get() = sharedPreferences["isVisibleRole"]!!
-        set(value) = sharedPreferences.set("isVisibleRole", value)
-
-    var addItemRole: Boolean
-        get() = sharedPreferences["addItemRole"]!!
-        set(value) = sharedPreferences.set("addItemRole", value)
-
-    var editItemRole: Boolean
-        get() = sharedPreferences["editItemRole"]!!
-        set(value) = sharedPreferences.set("editItemRole", value)
-
-    var deleteItemRole: Boolean
-        get() = sharedPreferences["deleteItemRole"]!!
-        set(value) = sharedPreferences.set("deleteItemRole", value)
-
-    var viewItemRole: Boolean
-        get() = sharedPreferences["viewItemRole"]!!
-        set(value) = sharedPreferences.set("viewItemRole", value)
-
-    var isVisibleUser: Boolean
-        get() = sharedPreferences["isVisibleUser"]!!
-        set(value) = sharedPreferences.set("isVisibleUser", value)
-
-    var addItemUser: Boolean
-        get() = sharedPreferences["addItemUser"]!!
-        set(value) = sharedPreferences.set("addItemUser", value)
-
-    var editItemUser: Boolean
-        get() = sharedPreferences["editItemUser"]!!
-        set(value) = sharedPreferences.set("editItemUser", value)
-
-    var deleteItemUser: Boolean
-        get() = sharedPreferences["deleteItemUser"]!!
-        set(value) = sharedPreferences.set("deleteItemUser", value)
-
-
-    var scanQrCodeDriver: Boolean
-        get() = sharedPreferences["scanQrCodeDriver"]!!
-        set(value) = sharedPreferences.set("scanQrCodeDriver", value)
+    var deviceName: String
+        get() = sharedPreferences["deviceName"]!!
+        set(value) = sharedPreferences.set("deviceName", value)
 
 
     fun userPermissionArray(array: ArrayList<Boolean?>, arrayName: String, mContext: Context): Boolean {

@@ -11,9 +11,7 @@ data class RoomsList (
         )
 
 data class Switch (
-        val name: String,
-        val nickName: String,
-        val isDimmable: Boolean,
-        val numOfSwitches: Int,
-        val switchType: Int
-        )
+        var name: String,
+        var nickName: String,
+        var isDimmable: Boolean,
+        val numOfSwitches: Int)

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.homeautomation.Activities.Models.Switch
 import com.homeautomation.R
 
+/*
 class RoomAdapter (private val context: Context, private val list: ArrayList<Switch>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -65,4 +66,4 @@ class RoomAdapter (private val context: Context, private val list: ArrayList<Swi
         const val VIEW_TYPE_TWO = 2
     }
 
-}
+}*/

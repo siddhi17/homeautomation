@@ -9,7 +9,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <variable
         name="data"
-        type="com.homeautomation.viewModels.DeviceViewModel" />
+        type="com.homeautomation.viewModels.LoginViewModel" />
 </data>
 
 <ScrollView
@@ -25,13 +25,19 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_height="match_parent"
         tools:context=".Activities.SendVerificationCodeActivity">
 
-        <androidx.appcompat.widget.AppCompatImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_logo"
             android:layout_width="@dimen/margin_100"
             android:layout_height="@dimen/margin_100"
             android:src="@drawable/logo"
             android:scaleType="fitXY"
-            android:layout_marginTop="@dimen/margin_100"
+            android:layout_marginTop="@dimen/margin_20"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -77,6 +83,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16"
+            android:text="@={data.emailId}"
             app:layout_constraintTop_toBottomOf="@id/text_title"/>
 
 
@@ -93,7 +100,8 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:text="@string/get_verification_code"
             android:textColor="@color/white"
             android:textAllCaps="false"
-            android:textSize="@dimen/text_size_16"
+            android:textSize="@dimen/text_size_18"
+            android:textCursorDrawable="@drawable/edit_text_drawable"
             android:onClick="@{(v)->click.onClick(v)}"/>
 
 
@@ -103,14 +111,17 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_height="wrap_content"
             android:text="@string/cancel"
             android:textSize="@dimen/text_size_16"
+            android:clickable="true"
+            android:focusable="true"
             android:textColor="@color/white"
             android:layout_marginTop="@dimen/margin_20"
             android:fontFamily="@font/roboto_bold"
+            android:onClick="@{(v)->click.onClick(v)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_proceed"
             app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 </layout>

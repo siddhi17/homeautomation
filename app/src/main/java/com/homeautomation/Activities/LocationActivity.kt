@@ -1,19 +1,18 @@
 package com.homeautomation.Activities
 
 import android.content.Intent
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.Html
-import android.text.TextWatcher
-import android.text.method.LinkMovementMethod
 import android.view.View
+import android.widget.Switch
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.homeautomation.Activities.Models.Device
 import com.homeautomation.Activities.Responses.GetLocationsResponse
 import com.homeautomation.Adapters.LocationsAdapter
 import com.homeautomation.R
@@ -22,19 +21,18 @@ import com.homeautomation.Utils.NetworkUtils
 import com.homeautomation.Utils.ProgressDialogUtils
 import com.homeautomation.base.BaseActivity
 import com.homeautomation.databinding.ActivityLocationBinding
-import com.homeautomation.databinding.ActivityRegisterBinding
-import com.homeautomation.isValidPasswordFormat
 import com.homeautomation.showToast
 import com.homeautomation.viewModels.LocationViewModel
-import com.homeautomation.viewModels.LoginViewModel
 import kotlinx.android.synthetic.main.activity_location.*
 import kotlinx.android.synthetic.main.activity_register.*
+import java.lang.reflect.Type
 
 class LocationActivity : BaseActivity(), View.OnClickListener {
 
     lateinit var locationViewModel: LocationViewModel
     var locationsAdapter: LocationsAdapter? = null
 
+    val gson : Gson? = null
 
     override fun init() {
 
@@ -48,7 +46,15 @@ class LocationActivity : BaseActivity(), View.OnClickListener {
 
         locationViewModel.userId = preference.userId
 
-        et_location.addTextChangedListener(object : TextWatcher {
+
+
+    /*    locationViewModel.locationsList.add(GetLocationsResponse.Location("","Home",locationViewModel.userId,false))
+        locationViewModel.locationsList.add(GetLocationsResponse.Location("","Bungalow",locationViewModel.userId,false))
+        locationViewModel.locationsList.add(GetLocationsResponse.Location("","Flat",locationViewModel.userId,false))
+        locationViewModel.locationsList.add(GetLocationsResponse.Location("","Office",locationViewModel.userId,false))
+        locationViewModel.locationsList.add(GetLocationsResponse.Location("","Workshop",locationViewModel.userId,false))
+*/
+        /*et_location.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
 
@@ -60,7 +66,7 @@ class LocationActivity : BaseActivity(), View.OnClickListener {
             override fun afterTextChanged(s: Editable) {
                 image_location.visibility = View.VISIBLE
             }
-        })
+        })*/
 
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,10 +75,15 @@ class LocationActivity : BaseActivity(), View.OnClickListener {
 
 
         init()
+
         myObserver()
-        getLocations()
         setLocationsAdapter()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getLocations()
     }
     //Set Locations Adapter
     private fun setLocationsAdapter() {
@@ -82,10 +93,13 @@ class LocationActivity : BaseActivity(), View.OnClickListener {
 
         if (locationsAdapter == null) {
             locationsAdapter = LocationsAdapter(this, locationViewModel.locationsList,
-                    object: LocationsAdapter.LocationListener{
+                    object : LocationsAdapter.LocationListener {
                         override fun clickItem(pos: Int, list: ArrayList<GetLocationsResponse.Location>) {
-                            startActivity(Intent(this@LocationActivity,RoomsActivity::class.java)
-                                    .putExtra("locationId",list[pos].id))
+
+                            locationsAdapter?.updateStatus()
+                            locationViewModel.location = list[pos].locationName.toString()
+
+                            preference.locationId = list[pos].id.toString()
                         }
                     })
             rv_locations.adapter = locationsAdapter
@@ -98,7 +112,7 @@ class LocationActivity : BaseActivity(), View.OnClickListener {
 
         when(v!!.id)
         {
-            R.id.text_add_location -> {
+         /*   R.id.text_add_location -> {
 
                 text_add_location.visibility = View.GONE
                 relative_location.visibility = View.VISIBLE
@@ -108,20 +122,44 @@ class LocationActivity : BaseActivity(), View.OnClickListener {
 
                 if (NetworkUtils.isInternetAvailable(this)) {
 
-                    if (locationViewModel.locationValidation(v)) {
-                        locationViewModel.hitAddLocationApi()
+                    if(locationViewModel.location.toLowerCase().contains("home"))
+                        showToast("Location already exist.")
+                    else {
+                        if (locationViewModel.locationValidation(v)) {
+                            locationViewModel.hitAddLocationApi()
+                        }
                     }
                 }
                 else {
                     showToast(getString(R.string.error_internet))
                 }
-            }
+            }*/
             R.id.imageView_back -> {
 
                 finish()
             }
+            R.id.btn_proceed -> {
+
+                if(locationViewModel.location == "")
+                {
+                    showToast(getString(R.string.add_location_error))
+                }
+                else {
+                    startActivity(Intent(this@LocationActivity, RoomsActivity::class.java))
+                    finish()
+                }
+            }
         }
 
+    }
+    fun addLocation(){
+
+        if (NetworkUtils.isInternetAvailable(this)) {
+            locationViewModel.hitAddLocationApi()
+        }
+        else {
+            showToast(getString(R.string.error_internet))
+        }
     }
 
     fun getLocations(){
@@ -135,17 +173,16 @@ class LocationActivity : BaseActivity(), View.OnClickListener {
 
     private fun myObserver() {
 
+
         locationViewModel.addLocationResponse.observe(this, Observer {
             ProgressDialogUtils.getInstance().hideProgress()
+            if (it.locationId != "") {
 
-            if (it.locationId.isEmpty())
-                showToast("Location Already Exist")
-            else
-                getLocations()
+            }
+            else{
 
-            et_location.clearFocus()
-            et_location.setText("")
-            image_location.visibility = View.GONE
+                Toast.makeText(this@LocationActivity,it.error,Toast.LENGTH_LONG).show()
+            }
 
         })
 
@@ -159,22 +196,18 @@ class LocationActivity : BaseActivity(), View.OnClickListener {
 
         locationViewModel.getLocationsResponse.observe(this, Observer {
             ProgressDialogUtils.getInstance().hideProgress()
-
-            if(it.result == "true") {
+            if (it.result == "true") {
                 locationViewModel.locationsList.clear()
-                locationViewModel.locationsList.add(0,GetLocationsResponse.Location("1","Home"
-                        ,""))
-                locationViewModel.locationsList.addAll(it.locations)
+
+                it.locations.forEach {
+
+                    if(!locationViewModel.locationsList.map { it.locationName }.contains(it.locationName))
+                        locationViewModel.locationsList.add(it)
+
+                }
 
                 setLocationsAdapter()
             }
-            else
-            {
-                locationViewModel.locationsList.add(0,GetLocationsResponse.Location("1","Home"
-                ,""))
-                setLocationsAdapter()
-            }
-
         })
 
         locationViewModel.errorGetLocations.observe(this, Observer {

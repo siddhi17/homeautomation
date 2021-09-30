@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_margin="@dimen/margin_20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,16 +27,18 @@
         android:layout_gravity="center_horizontal"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_28"
+        android:textSize="36sp"
         android:textColor="@color/white"
-        android:fontFamily="@font/roboto_black_italic"
+        android:fontFamily="@font/bnj"
         android:text="@string/kushall"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_logo"
-        android:layout_marginTop="@dimen/margin_20"/>
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_40"/>
 
     </LinearLayout>
 

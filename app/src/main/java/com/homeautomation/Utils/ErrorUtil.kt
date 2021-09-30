@@ -52,6 +52,13 @@ object ErrorUtil {
                         500 -> {
                             //Logout
                             //forceLogout(context)
+
+                            Toast.makeText(
+                                    context,
+                                    "Server Error PLease Try Later",
+                                    Toast.LENGTH_SHORT
+                            ).show()
+
                         }
                         403 -> {
                             ProgressDialogUtils.getInstance().hideProgress()

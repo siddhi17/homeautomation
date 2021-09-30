@@ -11,4 +11,5 @@ abstract class BaseViewModel : ViewModel() {
     val apiInterface: ApiInterface by lazy {
         RetrofitUtil.createBaseApiService()
     }
+
 }

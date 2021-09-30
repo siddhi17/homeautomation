@@ -7,8 +7,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/margin_160"
+        android:layout_height="@dimen/margin_180"
         app:cardElevation="@dimen/margin_10"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -16,51 +16,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:cardCornerRadius="@dimen/margin_15"
-        android:layout_margin="@dimen/margin_10">
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:layout_marginLeft="25dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/root"
+            android:layout_width="@dimen/margin_160"
+            android:layout_height="@dimen/margin_180"
             android:padding="@dimen/margin_15">
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_device"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_ks_100"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
 
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_status"
-                android:layout_width="@dimen/margin_40"
-                android:layout_height="@dimen/margin_40"
-                android:src="@drawable/component_22"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/component_32"
+                app:layout_constraintTop_toBottomOf="@id/text_status"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="@dimen/margin_5"
-                android:layout_marginRight="@dimen/margin_5" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:layout_marginRight="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_20"/>
 
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_device"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/img_status"
+                app:layout_constraintTop_toTopOf="parent"
                 android:text="Smart Wi-Fi plug"
                 android:textColor="@color/blue_200"
                 android:textSize="@dimen/text_size_14"
                 android:fontFamily="@font/roboto_medium"
-                app:layout_constraintEnd_toEndOf="@id/img_status"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="@dimen/margin_40"
-                android:layout_marginEnd="@dimen/margin_20"
-                android:layout_marginRight="@dimen/margin_20" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txt_location"
+                android:id="@+id/txt_loc_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/txt_device"
@@ -74,7 +69,7 @@
                 android:layout_marginRight="@dimen/margin_20" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txt_loc_name"
+                android:id="@+id/txt_room_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/txt_device"
@@ -82,7 +77,7 @@
                 android:textColor="@color/blue_200"
                 android:textSize="@dimen/text_size_12"
                 android:fontFamily="@font/roboto_regular"
-                app:layout_constraintStart_toEndOf="@id/txt_location"
+                app:layout_constraintStart_toEndOf="@id/txt_loc_name"
                 android:layout_marginTop="@dimen/margin_4"
                 android:layout_marginEnd="@dimen/margin_20"
                 android:layout_marginRight="@dimen/margin_20"
@@ -90,11 +85,12 @@
                 android:layout_marginLeft="@dimen/margin_5" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/txt_location"
+                app:layout_constraintTop_toBottomOf="@id/txt_loc_name"
                 android:text="Online"
-                android:textColor="@color/color_green"
+                android:textColor="@color/blue_200"
                 android:textSize="@dimen/text_size_12"
                 android:fontFamily="@font/roboto_regular"
                 app:layout_constraintStart_toStartOf="parent"

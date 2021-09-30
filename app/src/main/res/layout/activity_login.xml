@@ -15,7 +15,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@drawable/splash_background"
         android:fillViewport="true"
         android:fitsSystemWindows="true"
         tools:context=".activity.LoginActivity">
@@ -25,6 +25,13 @@
             android:layout_height="match_parent"
             android:background="@drawable/splash_background"
             tools:context=".Activities.LoginActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".Activities.LoginActivity">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_logo"
@@ -46,7 +53,7 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/login_to_your_account"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_16"
+                android:textSize="@dimen/text_size_18"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/img_logo"/>
@@ -73,6 +80,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_16"
                     android:text="@={data.emailId}"
+                    android:textCursorDrawable="@drawable/edit_text_drawable"
                     app:layout_constraintTop_toBottomOf="@id/text_title"/>
 
 
@@ -97,6 +105,7 @@
                 android:layout_height="@dimen/margin_52"
                 android:padding="@dimen/margin_15"
                 android:background="@null"
+                android:textCursorDrawable="@drawable/edit_text_drawable"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:fontFamily="@font/roboto_regular"
                 android:hint="@string/enter_your_password"
@@ -160,7 +169,7 @@
                 android:text="@string/login"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
-                android:textSize="@dimen/text_size_16"
+                android:textSize="@dimen/text_size_18"
                 android:onClick="@{(v)->click.onClick(v)}"/>
 
 
@@ -181,6 +190,7 @@
                     app:layout_constraintTop_toBottomOf="@id/btn_proceed"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

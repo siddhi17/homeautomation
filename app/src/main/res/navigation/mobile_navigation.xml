@@ -9,13 +9,26 @@
         android:id="@+id/navigation_home"
         android:name="com.homeautomation.Activities.Fragments.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_favourites"
+            app:destination="@id/navigation_favourites" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_scheduler"
+            app:destination="@id/navigation_scheduler" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_settings"
+            app:destination="@id/navigation_settings" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_scheduler"
         android:name="com.homeautomation.Activities.Fragments.SchedulerFragment"
         android:label="@string/title_scheduler"
-        tools:layout="@layout/fragment_scheduler" />
+        tools:layout="@layout/fragment_scheduler" >
+
+    </fragment>
 
 
     <fragment

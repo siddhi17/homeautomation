@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import com.homeautomation.Activities.Models.Login
 import com.homeautomation.Activities.Models.User
 import com.homeautomation.Activities.Responses.GetUserResponse
 import com.homeautomation.Activities.Responses.LoginResponse
@@ -33,7 +34,6 @@ class LoginViewModel: BaseViewModel() {
     var confirmPass: String = ""
     var isTermsSelected: Boolean = false
     var isPasswordVisible: Boolean = false
-
     /*Response*/
     var registerResponse = MutableLiveData<RegisterResponse>()
     var loginResponse = MutableLiveData<LoginResponse>()
@@ -141,7 +141,30 @@ class LoginViewModel: BaseViewModel() {
         errorRegister.value = it
     }
 
+    fun resetPasswordValidation(v: View): Boolean {
+        context = v.context
+        if (pass.isEmpty()) {
+            showToast(context, context.getString(R.string.new_passowrd_error))
+            return false
+        }
 
+        if (!isValidPasswordFormat(pass)) {
+            showToast(context, context.getString(R.string.password_error))
+            return false
+        }
+
+        if (confirmPass.isEmpty()) {
+            showToast(context, context.getString(R.string.confirm_password_error))
+            return false
+        }
+
+        if (pass != confirmPass) {
+            showToast(context, context.getString(R.string.password_confirm_does_not_match_error))
+            return false
+        }
+
+        return true
+    }
 
     fun loginValidation(v: View): Boolean {
         context = v.context
@@ -163,8 +186,7 @@ class LoginViewModel: BaseViewModel() {
     fun hitLoginApi() {
 
         disposable = apiInterface.loginApi(
-            email = emailId,
-            pwd = pass
+                Login(emailId,pass)
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {

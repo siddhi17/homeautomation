@@ -1,113 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginLeft="@dimen/margin_20"
-    android:layout_marginRight="@dimen/margin_20"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="@dimen/margin_20"
+    android:layout_marginLeft="@dimen/margin_20"
     android:layout_marginEnd="@dimen/margin_20"
-    android:background="@drawable/round_background_filled_white">
+    android:layout_marginRight="@dimen/margin_20"
+    android:background="@drawable/round_background_filled_white"
+    android:orientation="vertical">
 
-  <!--  <LinearLayout
+    <LinearLayout
         android:id="@+id/linear_device_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvHeading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_30"
-        android:layout_marginBottom="@dimen/margin_20"
-        android:gravity="center_horizontal"
-        android:fontFamily="@font/roboto_bold"
-        android:text="@string/choose_your_device"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_24"
-        android:layout_marginLeft="@dimen/margin_10"
-        android:layout_marginRight="@dimen/margin_10"
-        android:layout_marginStart="@dimen/margin_10"
-        android:layout_marginEnd="@dimen/margin_10"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin_10"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_30"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginBottom="@dimen/margin_20"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center_horizontal"
+            android:text="@string/choose_your_device"
+            android:textColor="#62757F"
+            android:textSize="@dimen/text_size_18" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/margin_20"
-        android:layout_marginBottom="@dimen/margin_20"
-        android:layout_marginStart="@dimen/margin_20"
-        android:layout_marginEnd="@dimen/margin_20">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_wifiList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            tools:listitem="@layout/item_wifi_layout"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_logo"
-        android:layout_width="@dimen/margin_24"
-        android:layout_height="@dimen/margin_24"
-        android:scaleType="fitXY"
-        android:layout_marginRight="@dimen/margin_20"
-        android:layout_marginEnd="@dimen/margin_20"
-        android:layout_gravity="center_horizontal"
-        android:src="@mipmap/ic_wifi" />
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_device_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:fontFamily="@font/roboto_regular"
-        android:text="Device name"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="@dimen/text_size_16" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </LinearLayout>-->
+    </LinearLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linear_add_device"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/margin_20">
+        android:visibility="visible">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linear_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/margin_20"
-        android:layout_marginLeft="@dimen/margin_20"
-        android:layout_marginRight="@dimen/margin_20"
-        android:layout_marginStart="@dimen/margin_20"
-        android:layout_marginEnd="@dimen/margin_20">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_device"
+            android:id="@+id/linear_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/searching_for_new_kushall_device"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textSize="@dimen/text_size_18" />
-
-        <ProgressBar
-            android:id="@+id/pBarCustom"
-            android:layout_width="@dimen/margin_24"
-            android:layout_height="@dimen/margin_24"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
-            android:indeterminateTint="@color/black" />
+            android:layout_marginStart="@dimen/margin_10"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginBottom="@dimen/margin_20"
+            android:orientation="vertical">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center_horizontal"
+                android:text="@string/searching_for_new_kushall_device"
+                android:textColor="#62757F"
+                android:textSize="@dimen/text_size_18" />
+
+            <ProgressBar
+                android:id="@+id/pBarCustom"
+                android:layout_width="@dimen/margin_24"
+                android:layout_height="@dimen/margin_24"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_20"
+                android:indeterminateTint="#2596CD" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -115,6 +91,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_20"
         android:background="@color/blue_200" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -122,16 +99,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_20"
-        android:layout_marginBottom="@dimen/margin_20"
-        android:layout_marginLeft="@dimen/margin_20"
-        android:layout_marginRight="@dimen/margin_20"
         android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginLeft="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_10"
         android:layout_marginEnd="@dimen/margin_20"
-        android:gravity="center_horizontal"
+        android:layout_marginRight="@dimen/margin_20"
+        android:layout_marginBottom="@dimen/margin_20"
         android:fontFamily="@font/roboto_regular"
+        android:gravity="center_horizontal"
         android:text="@string/cancel"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/text_size_18" />
+        android:textColor="#62757F"
+        android:textSize="@dimen/text_size_16" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -12,7 +12,8 @@
     <color name="add_background">#F0F9FE</color>
     <color name="color_62757F">#62757F</color>
     <color name="color_E5E5E5">#E5E5E5</color>
-    <color name="color_green">#37FF4B</color>
-    <color name="seeker_darkBlue">#B82596CD</color>
-    <color name="seeker_lightBlue">#5984D0F4</color>
+    <color name="seeker_darkBlue">#48C6F9</color>
+    <color name="seeker_lightBlue">#B0E6FC</color>
+    <color name="btn_color">#008DD2</color>
+    <color name="radio">#00B0EA</color>
 </resources>

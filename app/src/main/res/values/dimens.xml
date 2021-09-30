@@ -46,4 +46,8 @@
     <dimen name="text_size_12">12sp</dimen>
     <dimen name="margin_180">180dp</dimen>
     <dimen name="margin_220">220dp</dimen>
+    <dimen name="margin_26">26dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
+    <dimen name="margin_165">165dp</dimen>
+    <dimen name="nav_view_icon_size">18dp</dimen>
 </resources>

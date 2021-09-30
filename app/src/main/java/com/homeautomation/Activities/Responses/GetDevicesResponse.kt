@@ -15,9 +15,10 @@ data class GetDevicesResponse(
             val switches: List<Switches>
     ) {
         data class Switches(
-            val switch1: String,
-            val Type: String,
-            val switch2: String
+                val name: String?,
+                val type: String?,
+                val id: String?,
+                val value: Int?
         )
     }
 }

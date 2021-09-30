@@ -2,6 +2,7 @@ package com.homeautomation.Activities.Responses
 
 
 import com.google.gson.annotations.SerializedName
+import java.sql.Timestamp
 
 data class GetRoomsResponse(
     @SerializedName("result")
@@ -20,22 +21,32 @@ data class GetRoomsResponse(
             val userId: String,
             @SerializedName("locationId")
             val locationId: String,
-            val device: List<Device>
+            val device: List<Device>,
+            var isSelected: Boolean,
+            var img: Int
     )
     data class Device(
-        val _id: String,
-        val deviceId: String,
-        val deviceName: String,
-        val userId: String,
-        val roomId: String,
-        val locationId: String,
-        var locationName: String,
-        val switches: List<Switches>
+            val _id: String,
+            val deviceId: String,
+            val deviceName: String,
+            val userId: String,
+            val roomId: String,
+            val locationId: String,
+            var locationName: String,
+            var isLocationFailed: Boolean = false,
+            var roomName: String,
+            var status: String = "Offline",
+            val switches: ArrayList<Switches>,
+            var isOnline: Boolean? = false,
+            var timestamp: Long = 0,
+            var value: Int?
     ) {
+
         data class Switches(
-            val switch1: String?,
-            val Type: String?,
-            val switch2: String?
+                val name: String?,
+                val type: String?,
+                val id: String?,
+                var value: Int?
         )
     }
 }

@@ -9,7 +9,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <variable
         name="data"
-        type="com.homeautomation.viewModels.DeviceViewModel" />
+        type="com.homeautomation.viewModels.LoginViewModel" />
 </data>
 
 <ScrollView
@@ -25,13 +25,19 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_height="match_parent"
         tools:context=".Activities.VerificationActivity">
 
-        <androidx.appcompat.widget.AppCompatImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_logo"
             android:layout_width="@dimen/margin_100"
             android:layout_height="@dimen/margin_100"
             android:src="@drawable/logo"
             android:scaleType="fitXY"
-            android:layout_marginTop="@dimen/margin_100"
+            android:layout_marginTop="@dimen/margin_20"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -48,7 +54,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_marginEnd="@dimen/margin_24"
             android:fontFamily="@font/roboto_medium"
             android:textAlignment="center"
-            android:text="@string/title"
+            android:text="Enter Verification Code"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_18"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +74,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_marginRight="@dimen/margin_24"
             android:layout_marginEnd="@dimen/margin_24"
             android:layout_height="@dimen/margin_52"
+            android:textCursorDrawable="@drawable/edit_text_drawable"
             android:layout_gravity="center"
             android:background="@drawable/et_background"
             android:fontFamily="@font/roboto_regular"
@@ -91,20 +98,23 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:fontFamily="@font/roboto_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_otp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textView_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/resend"
             android:textSize="@dimen/text_size_16"
             android:textColor="@color/white"
             android:layout_marginTop="@dimen/margin_5"
             android:fontFamily="@font/roboto_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_resend"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center_horizontal"
+            android:textAlignment="center" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textView_resend_otp"
@@ -117,7 +127,9 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:fontFamily="@font/roboto_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_email"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"/>
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -133,10 +145,10 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:text="@string/resend_verification_code"
             android:textColor="@color/white"
             android:textAllCaps="false"
-            android:textSize="@dimen/text_size_16"
+            android:textSize="@dimen/text_size_18"
             android:onClick="@{(v)->click.onClick(v)}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 </layout>

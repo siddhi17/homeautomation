@@ -9,7 +9,7 @@ data class GetLocationsResponse(
     @SerializedName("error")
     val error: String,
     @SerializedName("locations")
-    val locations: List<Location>
+    val locations: ArrayList<Location>
 ) {
     data class Location(
         @SerializedName("_id")
@@ -17,6 +17,7 @@ data class GetLocationsResponse(
         @SerializedName("locationName")
         val locationName: String?,
         @SerializedName("userId")
-        val userId: String?
+        val userId: String?,
+        var isSelected: Boolean
     )
 }

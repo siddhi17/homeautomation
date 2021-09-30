@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/constraint"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -29,9 +30,10 @@
         android:max="100"
         android:padding="6dp"
         android:progress="0"
-        android:progressDrawable="@drawable/seekbar_custom"
+        android:background="@null"
         android:splitTrack="false"
-        android:thumb="@drawable/component_80"
+        android:progressDrawable="@drawable/seekbar_custom"
+        android:thumb="@drawable/component_159"
         app:layout_constraintEnd_toStartOf="@+id/img_status"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_switch"
@@ -44,10 +46,9 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:text="0%"
-        android:textColor="@color/black"
+        android:textColor="@color/colorText"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@id/seekBar"
-        app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="@id/seekBar"
         app:layout_constraintTop_toTopOf="@id/seekBar"
         tools:text="0%" />
@@ -57,9 +58,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Brightness"
-        android:textColor="@color/black"
+        android:textColor="@color/colorText"
         android:textSize="10sp"
-        app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintLeft_toLeftOf="@id/seekBar"
         app:layout_constraintRight_toRightOf="@id/seekBar"
         app:layout_constraintTop_toBottomOf="@id/percentage" />
@@ -68,7 +68,7 @@
         android:id="@+id/img_status"
         android:layout_width="@dimen/margin_60"
         android:layout_height="@dimen/margin_60"
-        android:src="@drawable/component_22"
+        android:src="@drawable/component_32"
         app:layout_constraintTop_toBottomOf="@id/text_switch"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="@dimen/margin_10"
@@ -76,6 +76,7 @@
         android:layout_marginTop="@dimen/margin_8"/>
 
     <View
+        android:id="@+id/view_line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_1"
         android:layout_marginTop="@dimen/margin_20"

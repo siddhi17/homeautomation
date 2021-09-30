@@ -1,2 +1,3 @@
+include ':wifiutils'
 include ':app'
 rootProject.name = "HomeAutomation"

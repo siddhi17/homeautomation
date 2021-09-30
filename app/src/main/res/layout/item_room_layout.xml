@@ -37,6 +37,17 @@
             android:background="@color/color_E5E5E5"
             android:layout_below="@id/img_room"/>
 
+        <RadioButton
+            android:id="@+id/radioRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:buttonTint="@color/radio"
+            android:layout_alignParentRight="true" />
+
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,13 +39,13 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
         binding.click = this
 
         checkbox_terms.text = ""
-        text_policy.text = Html.fromHtml("I am agree with the  " +
+        text_policy.text = Html.fromHtml("I agree with " +
                 "<a href='http://www.kushall.com/privacy-policy.html'> Privacy Policy </a>")
         text_policy.isClickable = true
         text_policy.setLinkTextColor(Color.WHITE)
         text_policy.setMovementMethod(LinkMovementMethod.getInstance())
 
-        text_terms.text = Html.fromHtml(" &  " + "<a href ='http://www.kushall.com/terms-condition.html'>Terms & Conditions </a>")
+        text_terms.text = Html.fromHtml(" &  " + "<a href ='http://www.kushall.com/terms-condition.html'>Terms Of Use </a>")
         text_terms.isClickable = true
         text_terms.setLinkTextColor(Color.WHITE)
         text_terms.setMovementMethod(LinkMovementMethod.getInstance())

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.homeautomation.Activities.Responses.GetLocationsResponse
 import com.homeautomation.R
+import com.homeautomation.capitalizeString
 import kotlinx.android.synthetic.main.item_location_layout.view.*
 
 class LocationsAdapter(private val context: Context, private var list: ArrayList<GetLocationsResponse.Location>,
@@ -15,7 +16,8 @@ class LocationsAdapter(private val context: Context, private var list: ArrayList
     : RecyclerView.Adapter<LocationsAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
-
+    var selectedPosition = -1
+    var previousSelectedPosition = -1
     //Inflate view for recycler
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyViewHolder {
         val view =
@@ -35,13 +37,17 @@ class LocationsAdapter(private val context: Context, private var list: ArrayList
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.itemView.apply {
 
-            text_location.text = list[position]?.locationName
+            text_location.text = capitalizeString(list[position]?.locationName!!)
 
-            text_location.setOnClickListener {
+            radioLocation.setOnCheckedChangeListener { buttonView, isChecked ->
+                if(buttonView.isPressed) {
 
-                click.clickItem(position, list)
+                    selectedPosition = position
+                    click.clickItem(position, list)
+                }
             }
 
+            radioLocation.isChecked = (list[position].isSelected)
         }
     }
     interface LocationListener {
@@ -49,4 +55,14 @@ class LocationsAdapter(private val context: Context, private var list: ArrayList
         fun clickItem(pos: Int, list: ArrayList<GetLocationsResponse.Location>)
 
     }
+    /* update item status */
+    fun updateStatus(){
+        if(previousSelectedPosition != -1)
+            list[previousSelectedPosition].isSelected=!list[previousSelectedPosition].isSelected
+
+        previousSelectedPosition = selectedPosition
+        list[selectedPosition].isSelected=!list[selectedPosition].isSelected
+        notifyDataSetChanged()
+    }
+
 }

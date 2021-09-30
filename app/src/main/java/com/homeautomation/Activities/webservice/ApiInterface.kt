@@ -1,12 +1,14 @@
 package com.storepanel.webservice
 
-import com.homeautomation.Activities.Models.AddLocation
-import com.homeautomation.Activities.Models.AddRoom
-import com.homeautomation.Activities.Models.User
+import android.content.Context
+import com.homeautomation.Activities.Models.*
 import com.homeautomation.Activities.Responses.*
+import com.homeautomation.Utils.MqttClientHelper
 import com.homeautomation.base.Constants
+import com.homeautomation.showToast
 import io.reactivex.Observable
 import okhttp3.MultipartBody
+import org.eclipse.paho.client.mqttv3.MqttException
 import retrofit2.http.*
 
 
@@ -19,11 +21,9 @@ interface ApiInterface {
     ): Observable<RegisterResponse>
 
     /*Login*/
-    @FormUrlEncoded
     @POST(Constants.LOGIN_URL)
     fun loginApi(
-        @Field("email") email: String,
-        @Field("pwd") pwd: String
+            @Body login: Login
     ): Observable<LoginResponse>
 
     /*Get User*/
@@ -61,5 +61,43 @@ interface ApiInterface {
     fun getRoomsApi(
             @Query("userId") userId: String
     ): Observable<GetRoomsResponse>
+
+
+    /*Get Device Details API*/
+    @GET(Constants.GET_DEVICE_DETAILS)
+    fun getDeviceDetailsApi(): Observable<GetDeviceDetailsResponse>
+
+    /*Get Networks API*/
+    @GET(Constants.GET_NETWORKS)
+    fun getNetworksApi(): Observable<GetNetworks>
+
+
+    /*Set Network*/
+    @POST(Constants.SET_NETWORK)
+    fun setNetworkApi(
+        @Query("network_ssid") network_ssid: String,
+        @Query("password") password: String
+    ): Observable<GetConnectionStatusResponse>
+
+    /*Get Connection Status API*/
+    @GET(Constants.GET_CONNECTION_STATUS)
+    fun getConnectionStatusApi(): Observable<GetConnectionStatusResponse>
+
+    /*Restart Device API*/
+    @GET(Constants.RESTART_DEVICE)
+    fun restartDeviceApi(): Observable<RestartDeviceResponse>
+
+
+    /*Add Device*/
+    @POST(Constants.ADD_DEVICE)
+    fun createDeviceApi(
+            @Body device: AddDevice
+    ): Observable<AddDeviceResponse>
+
+
+    fun hitMqttServer(context: Context, topic: String)
+    {
+
+    }
 
 }

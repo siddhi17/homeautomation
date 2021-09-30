@@ -1,80 +1,66 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="click"
-            type="android.view.View.OnClickListener" />
-
-        <variable
-            name="data"
-            type="com.homeautomation.viewModels.DeviceViewModel" />
-    </data>
-
-    <ScrollView
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_add_device"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        tools:context=".Activities.ConnectWifiActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+       <!-- <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_add_device"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".Activities.ConnectWifiActivity">
 
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/app_bar"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/top_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/my_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
-                    android:elevation="4dp"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageView_back"
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:onClick="@{(v)->click.onClick(v)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                    app:srcCompat="@drawable/ic_left_arrow"
+                    tools:ignore="VectorDrawableCompat"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginLeft="@dimen/margin_16" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/margin_30"
-                        android:layout_marginRight="@dimen/margin_30"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/set_up_device"
+                    android:textColor="@color/blue_200"
+                    android:textSize="@dimen/text_size_24"                    android:layout_gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageView_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/imageView_back"
-                            android:layout_width="@dimen/margin_24"
-                            android:layout_height="@dimen/margin_24"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:src="@drawable/ic_back"
-                            android:onClick="@{(v)->click.onClick(v)}"/>
+                <View android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_1"
+                    android:background="@color/blue_500"
+                    android:layout_marginTop="@dimen/margin_20"
+                    app:layout_constraintTop_toBottomOf="@id/text_title"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_10"/>
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/text_title_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_medium"
-                            android:text="@string/add_device"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:textColor="@color/dark_grey"
-                            android:textSize="@dimen/text_size_17"
-                            android:layout_gravity="center_vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imageView_back" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.appcompat.widget.Toolbar>
-            </com.google.android.material.appbar.AppBarLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -84,7 +70,7 @@
                 android:layout_marginTop="@dimen/margin_20"
                 android:orientation="vertical"
                 android:visibility="visible"
-                app:layout_constraintTop_toBottomOf="@id/app_bar">
+                app:layout_constraintTop_toBottomOf="@id/top_bar">
 
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -113,7 +99,7 @@
                     android:fontFamily="@font/roboto_medium"
                     android:text="Adding New Device"
                     app:layout_constraintTop_toBottomOf="@id/img_logo"
-                    android:textColor="@color/blue_700"
+                    android:textColor="@color/blue_200"
                     android:textSize="@dimen/text_size_18" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -130,7 +116,7 @@
                     android:fontFamily="@font/roboto_medium"
                     android:text="Device Name"
                     app:layout_constraintTop_toBottomOf="@id/tv_device_name"
-                    android:textColor="@color/blue_700"
+                    android:textColor="@color/blue_200"
                     android:textSize="@dimen/text_size_18" />
 
 
@@ -175,7 +161,7 @@
                     android:layout_marginLeft="@dimen/margin_16"
                     android:layout_marginEnd="@dimen/margin_16"
                     android:layout_marginRight="@dimen/margin_16"
-                    app:layout_constraintTop_toBottomOf="@id/app_bar">
+                    app:layout_constraintTop_toBottomOf="@id/top_bar">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/et_wifi_network"
@@ -283,6 +269,25 @@
                 android:layout_marginBottom="@dimen/margin_40"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/linear_container" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</layout>
+        </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_wifi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/set_up_device"
+        android:textColor="@color/blue_200"
+        android:textSize="@dimen/text_size_24"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_gravity="center_vertical"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf = "parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlCompat" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

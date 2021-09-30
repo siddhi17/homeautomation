@@ -1,71 +1,115 @@
 package com.homeautomation.Activities
 
-import android.annotation.SuppressLint
+
+import android.Manifest
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.wifi.WifiConfiguration
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListPopupWindow
+import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.github.florent37.runtimepermission.kotlin.askPermission
+import com.homeautomation.Adapters.KushallDeviceAdapter
 import com.homeautomation.R
-import com.homeautomation.Utils.ProgressDialogUtils
+import com.homeautomation.Utils.*
 import com.homeautomation.base.BaseActivity
-import com.homeautomation.databinding.ActivityConnectWifiBinding
 import com.homeautomation.showToast
 import com.homeautomation.viewModels.DeviceViewModel
+import com.thanosfisherman.wifiutils.WifiUtils
+import com.thanosfisherman.wifiutils.wifiConnect.ConnectionErrorCode
+import com.thanosfisherman.wifiutils.wifiConnect.ConnectionSuccessListener
 import kotlinx.android.synthetic.main.activity_connect_wifi.*
+import kotlinx.android.synthetic.main.activity_rooms.*
 import kotlinx.android.synthetic.main.add_device_dialog.*
 
-class ConnectWifiActivity : BaseActivity(), View.OnClickListener {
+
+class ConnectWifiActivity : BaseActivity(), View.OnClickListener, WifiReceiver.Message {
 
     lateinit var deviceViewModel: DeviceViewModel
-    var wifiNetworkList: ArrayList<String> = ArrayList()
+    var kushallNetworkList: ArrayList<String> = ArrayList()
     lateinit var dialogNewOrderRequest: Dialog
+    var isPermissionGiven: Boolean = false
+    lateinit var wifiManager: WifiManager
+    var receiverWifi: WifiReceiver? = null
+    var kushallDeviceAdapter: KushallDeviceAdapter? = null
+    var isKushallDevice: Boolean = false
+    var wifiDeviceSSID: String = ""
+    var isKushallDeviceConnection: Boolean = false
+    var success: Boolean = false
+    var isDeviceFound: Int = 0
+    var cancelClicked: Boolean = false
+    var wifiEnabled = false
 
     override fun init() {
 
-        linear_container.visibility = View.GONE
-        btn_connect.visibility = View.GONE
+        wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        if (wifiManager.isWifiEnabled) {
+            initStatusDialog("")
 
-        initStatusDialog("")
+            // wifi is enabled
+            text_wifi.visibility = View.GONE
+            wifiEnabled = wifiManager.isWifiEnabled
 
-        wifiNetworkList.add("WiFi 1")
-        wifiNetworkList.add("WiFi 2")
-        wifiNetworkList.add("WiFi 3")
-        wifiNetworkList.add("WiFi 4")
+            val intentFilter = IntentFilter()
+            receiverWifi = WifiReceiver(wifiManager)
+            intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)
+            registerReceiver(receiverWifi, intentFilter)
+
+            receiverWifi!!.setMessage(this);
+
+            success = wifiManager.startScan()
+            if (!success) {
+                // scan failure handling
+                scanFailure()
+            }
+
+        }
+        else {
+            text_wifi.text = "Please Turn On Wifi To Connect With Kushall Device"
+        }
+
+    }
+
+    private fun scanSuccess() {
+        val results = wifiManager.scanResults
+        Log.d("results", results.toString())
+    }
+
+    private fun scanFailure() {
+        // handle failure: new scan did NOT succeed
+        // consider using old scan results: these are the OLD results!
+        val results = wifiManager.scanResults
+        Log.d("resultsFailure", results.toString())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val binding: ActivityConnectWifiBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_connect_wifi)
-
+        setContentView(R.layout.activity_connect_wifi)
         deviceViewModel = ViewModelProvider(this).get(DeviceViewModel::class.java)
-
-        binding.data = deviceViewModel
-        binding.click = this
 
         dialogNewOrderRequest = Dialog(this)
 
-        init()
+        setupPermissions()
 
+        init()
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onClick(v: View?) {
         when (v!!.id) {
 
-            R.id.et_wifi_network -> {
+       /*     R.id.et_wifi_network -> {
 
                 showWifiNetworkList(wifiNetworkList, et_wifi_network, this)
 
@@ -79,7 +123,7 @@ class ConnectWifiActivity : BaseActivity(), View.OnClickListener {
                 } else {
                     deviceViewModel.isPasswordVisible = true
                     et_enterPass.transformationMethod =
-                        PasswordTransformationMethod.getInstance()
+                            PasswordTransformationMethod.getInstance()
                     imageView_show.setImageResource(R.drawable.eye_hide)
                 }
 
@@ -87,12 +131,11 @@ class ConnectWifiActivity : BaseActivity(), View.OnClickListener {
 
             R.id.btn_connect -> {
 
-                ProgressDialogUtils.getInstance()
-                    .showProgress(this, false)
+                deviceViewModel.mProgess.value = true
 
                 showToast("Connecting to WiFi Network")
 
-                Handler().postDelayed({
+                *//*  Handler().postDelayed({
 
                     ProgressDialogUtils.getInstance().hideProgress()
 
@@ -101,10 +144,13 @@ class ConnectWifiActivity : BaseActivity(), View.OnClickListener {
                     startActivity(Intent(this, AddDeviceActivity::class.java))
                     finish()
 
-                }, 3000)
+                }, 3000)*//*
 
+                //  connectToANewWifiNetwork()
+                isKushallDeviceConnection = false
+                connectWithWpa(this,et_wifi_network.text.toString(),et_enterPass.text.toString())
 
-            }
+            }*/
 
         }
     }
@@ -115,21 +161,27 @@ class ConnectWifiActivity : BaseActivity(), View.OnClickListener {
 
         dialogNewOrderRequest.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialogNewOrderRequest.window?.setGravity(Gravity.CENTER)
+        dialogNewOrderRequest.setCancelable(false)
 
-        dialogNewOrderRequest.show()
+        if(!cancelClicked)
+            dialogNewOrderRequest.show()
 
         Handler().postDelayed({
 
-            dialogNewOrderRequest.dismiss()
             ProgressDialogUtils.getInstance().hideProgress()
 
-            deviceConnected("")
+            if (isDeviceFound == 0)
+                deviceConnected("")
 
-        }, 5000)
+        }, 10000)
 
-        dialogNewOrderRequest.tv_cancel.setOnClickListener{
-
+        dialogNewOrderRequest.tv_cancel.setOnClickListener {
+            isDeviceFound = 3
+            unregisterReceiver(receiverWifi)
+            cancelClicked = true
             dialogNewOrderRequest.dismiss()
+            finish()
+            startActivity(Intent(this,LocationActivity::class.java))
         }
 
     }
@@ -141,60 +193,142 @@ class ConnectWifiActivity : BaseActivity(), View.OnClickListener {
 
         dialogNewOrderRequest.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialogNewOrderRequest.window?.setGravity(Gravity.CENTER)
+        dialogNewOrderRequest.setCancelable(false)
 
         dialogNewOrderRequest.show()
 
         dialogNewOrderRequest.linear_add_device.visibility = View.GONE
-     //   dialogNewOrderRequest.linear_device_details.visibility = View.VISIBLE
+        dialogNewOrderRequest.linear_device_details.visibility = View.VISIBLE
 
-        Handler().postDelayed({
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this@ConnectWifiActivity)
+        dialogNewOrderRequest.rv_wifiList.layoutManager = layoutManager
 
-            ProgressDialogUtils.getInstance().hideProgress()
 
+        if (kushallDeviceAdapter == null) {
+            kushallDeviceAdapter = KushallDeviceAdapter(this, kushallNetworkList,
+                object : KushallDeviceAdapter.ClickListener {
+                    @RequiresApi(Build.VERSION_CODES.O)
+                    override fun clickItem(pos: String) {
+
+                        deviceViewModel.mProgess.value = true
+
+                        wifiDeviceSSID = pos
+                        isKushallDeviceConnection = true
+
+                        if (isPermissionGiven)
+                            connectWithWpa(this@ConnectWifiActivity, wifiDeviceSSID, "testpass")
+                        else
+                            setupPermissions()
+
+                        dialogNewOrderRequest.dismiss()
+                    }
+                })
+            dialogNewOrderRequest.rv_wifiList.adapter = kushallDeviceAdapter
+        } else {
+            kushallDeviceAdapter?.notifyDataSetChanged()
+        }
+
+        dialogNewOrderRequest.tv_cancel.setOnClickListener {
+            isDeviceFound = 3
+            unregisterReceiver(receiverWifi)
+            cancelClicked = true
             dialogNewOrderRequest.dismiss()
-
-            linear_container.visibility = View.VISIBLE
-            btn_connect.visibility = View.VISIBLE
-
-        }, 5000)
-
-        dialogNewOrderRequest.tv_cancel.setOnClickListener{
-
-            dialogNewOrderRequest.dismiss()
+            finish()
+            startActivity(Intent(this,LocationActivity::class.java))
         }
 
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun showWifiNetworkList(array: ArrayList<String>, view: View, context: Context) {
+    /* Set up run time permissions */
+    private fun setupPermissions() {
 
-        var list = ArrayList<String>()
-        list.addAll(array.map { it })
+        askPermission(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.CHANGE_WIFI_STATE,
+            Manifest.permission.CHANGE_NETWORK_STATE
+        ) {
+            //all of your permissions have been accepted by the user
 
-        val popupMenu = ListPopupWindow(this)
-        popupMenu.setAdapter(
-            ArrayAdapter(
+            isPermissionGiven = true
+
+        }.onDeclined { e ->
+            //at least one permission have been declined by the user
+
+            AlertDialogUtil.showSimpleAlertDialog(
                 this,
-                R.layout.spinner_dropdown,
-                list
+                "Please give permissions to connect with Wi-Fi.",
+                true
             )
-        )
-        popupMenu.anchorView = view
-        popupMenu.verticalOffset = -20
-        popupMenu.setBackgroundDrawable(getDrawable(R.drawable.round_background_filled_white))
 
-        popupMenu.setOnItemClickListener{ adapterView: AdapterView<*>, view1: View, i: Int, l: Long ->
-
-            et_wifi_network.setText(array[i])
-
-            popupMenu.dismiss()
-            list.clear()
         }
-        popupMenu.isModal = true
-        popupMenu.setOnDismissListener {
-        }
+    }
 
-        popupMenu.show()
+    override fun getMsg(arrayList: ArrayList<String>) {
+
+        for (item in arrayList) {
+
+            if (item.contains("KushallSwitch")) {
+                kushallNetworkList.add(item)
+                isKushallDevice = true
+            } else {
+                isKushallDevice = false
+            }
+        }
+        kushallDeviceAdapter?.notifyDataSetChanged()
+
+        if(kushallNetworkList.isEmpty()) {
+            if (isDeviceFound <= 2) {
+                Toast.makeText(
+                    this,
+                    "Could Not Find Kushall Device Wifi, Trying Again.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                success = wifiManager.startScan()
+                dialogNewOrderRequest.dismiss()
+                initStatusDialog("")
+                isDeviceFound++
+            }
+            else {
+                unregisterReceiver(receiverWifi)
+                dialogNewOrderRequest.dismiss()
+                finish()
+                startActivity(Intent(this,LocationActivity::class.java))
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun connectWithWpa(context: Context, id: String, pass: String) {
+
+        WifiUtils.withContext(context)
+                .connectWith(id, pass)
+                .setTimeout(15000)
+                .onConnectionResult(object : ConnectionSuccessListener {
+                    override fun success() {
+                        Toast.makeText(context, "Connected to device WiFi.", Toast.LENGTH_SHORT)
+                            .show()
+
+                        startActivity(
+                            Intent(
+                                this@ConnectWifiActivity,
+                                AddDeviceActivity::class.java
+                            ).putExtra("deviceSSID", wifiDeviceSSID)
+                        )
+                        finish()
+                        ProgressDialogUtils.getInstance().hideProgress()
+                    }
+
+                    override fun failed(errorCode: ConnectionErrorCode) {
+                        Toast.makeText(context, "Failed to connect to WiFi.", Toast.LENGTH_SHORT)
+                            .show()
+                        if (isPermissionGiven)
+                            connectWithWpa(this@ConnectWifiActivity, wifiDeviceSSID, "testpass")
+                        else
+                            setupPermissions()
+                    }
+                })
+                .start()
+
     }
 }

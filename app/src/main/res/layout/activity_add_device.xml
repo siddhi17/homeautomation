@@ -17,7 +17,8 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@color/white">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/layout_add_device"
@@ -26,58 +27,51 @@
     tools:context=".Activities.AddDeviceActivity">
 
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/my_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageView_back"
+            android:layout_width="@dimen/margin_20"
+            android:layout_height="@dimen/margin_20"
+            android:onClick="@{(v)->click.onClick(v)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            app:srcCompat="@drawable/ic_left_arrow"
+            tools:ignore="VectorDrawableCompat"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginLeft="@dimen/margin_16" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_16"
-                android:layout_marginRight="@dimen/margin_16"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/set_up_device"
+            android:textColor="@color/blue_200"
+            android:textSize="@dimen/text_size_24"
+            android:layout_gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imageView_back"
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
-                    android:onClick="@{(v)->click.onClick(v)}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_back"
-                    tools:ignore="VectorDrawableCompat" />
+        <View android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_1"
+            android:background="@color/blue_500"
+            android:layout_marginTop="@dimen/margin_20"
+            app:layout_constraintTop_toBottomOf="@id/text_title"
+            android:layout_marginStart="@dimen/margin_10"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_10"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/text_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="@string/set_up_device"
-                    android:textColor="@color/blue_700"
-                    android:textSize="@dimen/text_size_18"
-                    android:layout_gravity="center_vertical"
-                    app:layout_constraintStart_toEndOf="@id/imageView_back"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="@dimen/margin_16"
-                    android:layout_marginLeft="@dimen/margin_16"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linear_container"
@@ -86,7 +80,7 @@
         android:layout_marginTop="@dimen/margin_20"
         android:orientation="vertical"
         android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/app_bar">
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -95,7 +89,7 @@
         android:layout_height="100dp"
         android:scaleType="fitXY"
         android:layout_gravity="center_horizontal"
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -115,11 +109,11 @@
             android:fontFamily="@font/roboto_medium"
             android:text="Adding New Device"
             app:layout_constraintTop_toBottomOf="@id/img_logo"
-            android:textColor="@color/blue_700"
+            android:textColor="@color/blue_200"
             android:textSize="@dimen/text_size_18" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_device_name_value"
+            android:id="@+id/tv_device_name_"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -132,7 +126,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="Device Name"
             app:layout_constraintTop_toBottomOf="@id/tv_device_name"
-            android:textColor="@color/blue_700"
+            android:textColor="@color/blue_200"
             android:textSize="@dimen/text_size_18" />
 
 
@@ -145,41 +139,47 @@
             android:layout_marginRight="@dimen/margin_10"
             android:layout_marginStart="@dimen/margin_10"
             android:layout_marginEnd="@dimen/margin_10"
-            app:layout_constraintTop_toBottomOf="@id/tv_device_name_value"
-            android:background="@android:color/darker_gray" />
+            app:layout_constraintTop_toBottomOf="@id/tv_device_name_"
+            android:background="@color/blue_200" />
 
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_select_network"
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/wifi_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_20"
-            android:layout_marginBottom="@dimen/margin_20"
-            android:layout_marginLeft="@dimen/margin_30"
-            android:layout_marginRight="@dimen/margin_30"
-            android:layout_marginStart="@dimen/margin_30"
-            android:layout_marginEnd="@dimen/margin_30"
-            android:gravity="center_horizontal"
-            android:fontFamily="@font/roboto_regular"
-            android:text="Select your 2.4GHz WiFi network to connect kushall device"
             app:layout_constraintTop_toBottomOf="@id/view_divider"
-            android:textColor="@color/grey_text"
-            android:textSize="@dimen/text_size_16" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-
-
-
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_select_network"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:layout_marginLeft="@dimen/margin_30"
+                android:layout_marginRight="@dimen/margin_30"
+                android:layout_marginStart="@dimen/margin_30"
+                android:layout_marginEnd="@dimen/margin_30"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Select your 2.4GHz WiFi network to connect kushall device"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/grey_text"
+                android:textSize="@dimen/text_size_14" />
         <RelativeLayout
             android:id="@+id/relative_wifi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_10"
             android:layout_marginStart="@dimen/margin_16"
             android:layout_marginLeft="@dimen/margin_16"
             android:layout_marginEnd="@dimen/margin_16"
             android:layout_marginRight="@dimen/margin_16"
-            app:layout_constraintTop_toBottomOf="@id/app_bar">
+            app:layout_constraintTop_toBottomOf="@id/tv_select_network">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_wifi_network"
@@ -190,8 +190,8 @@
                 android:hint="@string/select_wifi"
                 android:imeOptions="actionNext"
                 android:inputType="textPersonName"
-                android:maxLength="21"
                 android:maxLines="1"
+                android:textCursorDrawable="@drawable/edit_text_drawable"
                 android:singleLine="true"
                 android:textColor="@color/dark_grey"
                 android:focusable="false"
@@ -199,7 +199,8 @@
                 android:textSize="@dimen/text_size_16"
                 android:onClick="@{(v)->click.onClick(v)}"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="ExtraText" />
+                tools:ignore="ExtraText"
+                android:text="@={data.wifiSSId}"/>
 
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -222,7 +223,7 @@
         </RelativeLayout>
 
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/relative_enter_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -230,7 +231,8 @@
             android:layout_marginStart="@dimen/margin_16"
             android:layout_marginLeft="@dimen/margin_16"
             android:layout_marginRight="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_16">
+            android:layout_marginEnd="@dimen/margin_16"
+            app:layout_constraintTop_toBottomOf="@id/relative_wifi">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_enterPass"
@@ -239,20 +241,27 @@
                 android:background="@null"
                 android:fontFamily="@font/roboto_regular"
                 android:hint="@string/password"
+                android:textCursorDrawable="@drawable/edit_text_drawable"
                 android:imeOptions="actionNext"
                 android:inputType="textPassword"
-                android:maxLength="21"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/text_size_16" />
+                android:textSize="@dimen/text_size_16"
+                android:text="@={data.password}"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_1"
                 android:layout_marginTop="@dimen/margin_11"
                 android:background="@android:color/darker_gray"
-                android:layout_below="@id/imageView_show"/>
+                android:layout_below="@id/imageView_show"
+                app:layout_constraintTop_toBottomOf="@id/imageView_show"/>
 
             <ImageView
                 android:id="@+id/imageView_show"
@@ -263,36 +272,58 @@
                 android:src="@drawable/eye_hide"
                 android:onClick="@{(v)->click.onClick(v)}"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_switches"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_connect_wifi"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_20"
-            android:layout_marginLeft="@dimen/margin_16"
-            android:layout_marginRight="@dimen/margin_16"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_16"
-            android:gravity="center_horizontal"
-            android:fontFamily="@font/roboto_regular"
-            android:text="Set Your Switches as Dimmable or Non-Dimmabale"
-            app:layout_constraintTop_toBottomOf="@id/view_divider"
-            android:textColor="@color/grey_text"
-            android:textSize="@dimen/text_size_14" />
+            android:layout_height="@dimen/margin_56"
+            android:layout_marginStart="@dimen/margin_28"
+            android:layout_marginTop="@dimen/margin_42"
+            android:layout_marginEnd="@dimen/margin_28"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/roboto_medium"
+            android:onClick="@{(v)->click.onClick(v)}"
+            android:text="@string/connect"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16"
+            android:layout_marginBottom="@dimen/margin_40"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/relative_enter_pass" />
 
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/linear_switch_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
-                android:orientation="vertical">
+                android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/wifi_bar">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_switches"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginRight="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/set_friendly_name_to_switches"
+
+                android:textColor="@color/grey_text"
+                android:textSize="@dimen/text_size_14" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -302,8 +333,9 @@
                 android:layout_marginRight="@dimen/margin_16"
                 android:layout_marginEnd="@dimen/margin_16"
                 android:layout_marginLeft="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_28"
-                android:layout_marginStart="@dimen/margin_16" />
+                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginStart="@dimen/margin_16"
+                tools:listitem="@layout/switch_item_layout"/>
 
 
      <!--       <RelativeLayout
@@ -534,7 +566,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_56"
                     android:layout_marginStart="@dimen/margin_28"
-                    android:layout_marginTop="@dimen/margin_42"
+                    android:layout_marginTop="@dimen/margin_30"
                     android:layout_marginEnd="@dimen/margin_28"
                     android:background="@drawable/button_background"
                     android:fontFamily="@font/roboto_medium"
@@ -542,11 +574,11 @@
                     android:text="@string/proceed"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_16"
+                    android:textSize="@dimen/text_size_18"
                     android:layout_marginBottom="@dimen/margin_40" />
 
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -567,54 +599,167 @@
             app:rb_duration="3000"
             app:rb_scale="6"
             android:onClick="@{(v)->click.onClick(v)}">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/connection"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/margin_120"
-                android:layout_height="@dimen/margin_120"
-                android:layout_centerInParent="true"
+                android:layout_width="@dimen/margin_100"
+                android:layout_height="@dimen/margin_100"
                 android:id="@+id/centerImage"
                 android:src="@drawable/logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:onClick="@{(v)->click.onClick(v)}"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_connecting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/connecting_a_device"
+                android:layout_centerVertical="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_14"
+                tools:ignore="RtlCompat"
+                android:layout_marginTop="@dimen/margin_60"
+                android:textAlignment="center"
+                android:layout_marginBottom="@dimen/margin_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/centerImage" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/connecting_msg"
+                android:layout_centerVertical="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_14"
+                tools:ignore="RtlCompat"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_connecting"
+                android:layout_marginStart="@dimen/margin_80"
+                android:layout_marginEnd="@dimen/margin_80"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_20"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_msg1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/tvMsg"
+                android:layout_centerVertical="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_14"
+                tools:ignore="RtlCompat"
+                android:textAlignment="center"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_msg"
+                android:layout_marginStart="@dimen/margin_80"
+                android:layout_marginEnd="@dimen/margin_80"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_msg2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/tvMsg1"
+                android:layout_centerVertical="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_14"
+                tools:ignore="RtlCompat"
+                android:textAlignment="center"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_msg1"
+                android:layout_marginStart="@dimen/margin_80"
+                android:layout_marginEnd="@dimen/margin_80"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_msg3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/tvMsg2"
+                android:layout_centerVertical="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_14"
+                tools:ignore="RtlCompat"
+                android:textAlignment="center"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_msg2"
+                android:layout_marginStart="@dimen/margin_80"
+                android:layout_marginEnd="@dimen/margin_80"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_msg4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/tvMsg3"
+                android:layout_centerVertical="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_14"
+                tools:ignore="RtlCompat"
+                android:textAlignment="center"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/margin_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_msg3"
+                android:layout_marginStart="@dimen/margin_80"
+                android:layout_marginEnd="@dimen/margin_80"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_take_moment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/this_may_take_a_moment"
+                android:layout_centerVertical="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_14"
+                tools:ignore="RtlCompat"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginBottom="@dimen/margin_120"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_msg4"
+                android:textAlignment="center" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </com.skyfishjy.library.RippleBackground>
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_connecting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal"
-            android:fontFamily="@font/roboto_regular"
-            android:text="@string/connecting_a_device"
-            android:layout_centerVertical="true"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_14"
-            tools:ignore="RtlCompat"
-            android:textAlignment="center"
-            android:layout_marginBottom="@dimen/margin_20"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tv_take_moment"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_take_moment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal"
-            android:fontFamily="@font/roboto_regular"
-            android:text="@string/this_may_take_a_moment"
-            android:layout_centerVertical="true"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_14"
-            tools:ignore="RtlCompat"
-            android:layout_marginTop="@dimen/margin_20"
-            android:layout_marginBottom="@dimen/margin_200"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:textAlignment="center" />
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,6 +3,7 @@ package com.homeautomation.base
 import androidx.appcompat.app.AppCompatActivity
 import com.homeautomation.Utils.NetworkUtils
 import com.homeautomation.Utils.SharedPreferenceUtil
+import java.util.*
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -11,6 +12,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
 
     abstract fun init()
+
 
     val preference by lazy {
         SharedPreferenceUtil.getInstance(applicationContext)
