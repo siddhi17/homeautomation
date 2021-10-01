@@ -255,7 +255,6 @@ class DeviceDetailsActivity : BaseActivity(), View.OnClickListener {
         homeViewModel.mProgess.observe(this, Observer {
             if (it) {
                 ProgressDialogUtils.getInstance().hideProgress()
-                homeViewModel.mProgess.value = true
                 ProgressDialogUtils.getInstance().showProgress(this, true)
             } else {
                 ProgressDialogUtils.getInstance().hideProgress()
@@ -365,14 +364,6 @@ class DeviceDetailsActivity : BaseActivity(), View.OnClickListener {
             exception.toString()
         }
         return isTime
-    }
-
-    fun isPublishedResponse(timestamp: Long): Boolean {
-        val tenSecondsLater: Long = System.currentTimeMillis() + TEN_SECONDS
-        if (timestamp == tenSecondsLater) {
-            return true
-        } else
-            return false
     }
 
     override fun onDestroy() {
